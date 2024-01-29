@@ -88,7 +88,46 @@ docker run -it \
     --table_name=yellow_taxi_trips \
     --url=${URL}
 ```
+19) convert ingest-data into flask app
 
-curl -X POST -H "Content-Type: application/json" -d '{"user":"root", "password":"root", "host":"localhost", "port":"5431", "db":"ny_taxi", "table_name":"yellow_taxi_trips", "url":"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"}' http://localhost:9696/ingest
+20) test flask app
 
-pgcli -h localhost -p 5431 -u root -d ny_taxi
+curl -X POST -H "Content-Type: application/json" -d '{"user":"root", "password":"root", "host":"localhost", "port":"5432", "db":"ny_taxi", "table_name":"yellow_taxi_trips", "url":"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"}' http://localhost:9696/ingest
+
+21) install gunicorn 
+pip install gunicorn
+
+22) test gunicorn 
+gunicorn --timeout 60 --bind 0.0.0.0:9696 ingest-data:app
+increase timeout of gunicorn to allow it to finish
+
+23) build docker image of flask app
+docker build -t taxi_ingest:v002 .
+
+24) run docker image of flas app
+docker run -it --rm --network=week_1_default -p 9696:9696 taxi_ingest:v002 .
+
+25) add new docker to docker-compose
+expose port 9696
+
+26) load taxi data 
+change host field value
+curl -X POST -H "Content-Type: application/json" -d '{"user":"root", "password":"root", "host":"pgdatabase", "port":"5432", "db":"ny_taxi", "table_name":"green_taxi_trips", "url":"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"}' http://localhost:9696/ingest
+
+26) load zones data 
+change table_name field value
+curl -X POST -H "Content-Type: application/json" -d '{"user":"root", "password":"root", "host":"pgdatabase", "port":"5432", "db":"ny_taxi", "table_name":"zones", "url":"https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"}' http://localhost:9696/ingest
+
+27) install terraform
+wget https://releases.hashicorp.com/terraform/1.7.1/terraform_1.7.1_linux_386.zip
+unzip terraform_1.7.1_linux_386.zip 
+rm terraform_1.7.1_linux_386.zip 
+which terraform
+
+28) setup service account on gcp
+
+29) authenticate gcp service account using json file
+export GOOGLE_APPLICATION_CREDENTIALS=~/.gc/linen-source.json
+gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+
+30) setup terraform files

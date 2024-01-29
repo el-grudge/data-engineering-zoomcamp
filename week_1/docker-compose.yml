@@ -16,4 +16,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - "8080:80"
-    
+  taxi_ingest:
+    image: taxi_ingest:v002
+    ports:
+      - "9696:9696"
