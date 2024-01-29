@@ -26,8 +26,9 @@ def ingest_data(user, password, host, port, db, table_name, url):
 
     df = next(df_iter)
 
-    # df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
-    # df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+    if df.columns.isin(["lpep_pickup_datetime","lpep_dropoff_datetime"]).any():
+        df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+        df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
     df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
 
@@ -39,8 +40,9 @@ def ingest_data(user, password, host, port, db, table_name, url):
             t_start = time()
             df = next(df_iter)
 
-            # df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
-            # df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+            if df.columns.isin(["lpep_pickup_datetime","lpep_dropoff_datetime"]).any():
+                df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+                df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
             df.to_sql(name=table_name, con=engine, if_exists='append')
 
