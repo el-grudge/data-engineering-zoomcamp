@@ -16,4 +16,4 @@ Finally, we learned about Terraform, an open-source tool used for provisioning i
 
 👉 To demonstrate my learnings, I used docker-compose to run a postgres db, a pgadmin instance that connects with it, and a data ingestion service that loads data into it. You can find the code here: 
 
-#mlzoomcamp #ml_engineering #data_science #learning_in_public #boosting #decision_trees
+#data_engineering_zoomcamp #gcp #docker #terraform #data_engineering #learning_in_public
