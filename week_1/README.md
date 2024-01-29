@@ -14,6 +14,6 @@ We learned how to use pgcli for running SQL commands in a REPL fation. It's a gr
 🌐 Terraform
 Finally, we learned about Terraform, an open-source tool used for provisioning infrastracture resources through the use of configuration files that can be shared, maintained, and collaborated on. We saw how to use a variables.tf file to define common values that can be easily maintained, and learned how to use the main tf commands `terraform init`, `terraform plan`, `terraform apply`, and `terraform destroy`. We used Terraform to setup a Data Lake on Google Cloud Storage and a Data Warehouse in BigQuery.
 
-👉 To demonstrate my learnings, I used docker-compose to run a postgres db, a pgadmin instance that connects with it, and a data ingestion service that loads data into it. You can find the code here: 
+👉 To demonstrate my learnings, I used docker-compose to run a postgres db, a pgadmin instance that connects with it, and a data ingestion service that loads data into it. You can find the code [here](https://github.com/el-grudge/data-engineering-zoomcamp/tree/main/week_1) 
 
 #data_engineering_zoomcamp #gcp #docker #terraform #data_engineering #learning_in_public
