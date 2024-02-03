@@ -1,7 +1,9 @@
 blocks:
 - all_upstream_blocks_executed: true
   color: null
-  configuration: {}
+  configuration:
+    file_source:
+      path: data_loaders/extract_taxi_api.py
   downstream_blocks:
   - transfer_taxi_data
   executor_config: null
@@ -86,7 +88,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2024-02-03 09:31:23'
+updated_at: '2024-02-03T23:45:06+00:00'
 uuid: green_taxi_etl
 variables_dir: /home/src/mage_data/taxi-project
 widgets: []

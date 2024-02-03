@@ -44,4 +44,3 @@ def test_passenger_count(output, *args):
 @test
 def test_trip_distance(output, *args):
     assert output['trip_distance'].isin([0]).sum()==0, 'trip_distance is greater than 0'
-    
