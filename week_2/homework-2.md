@@ -29,3 +29,8 @@
 
 **solution**: - `4`
 
+## Question 6. Data Exporting
+
+### Answer 
+
+**solution**: - `96`

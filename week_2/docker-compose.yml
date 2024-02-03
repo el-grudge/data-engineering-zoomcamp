@@ -21,7 +21,7 @@ services:
       - 6789:6789
     volumes:
       - .:/home/src
-      #- ~/.gc/personal-gcp.json:/home/src/personal-gcp.json
+      - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
     restart: on-failure:5
   pgdatabase:
     image: postgres:14
