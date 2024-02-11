@@ -1,6 +1,5 @@
 import io
 import pandas as pd
-import requests
 
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
@@ -14,17 +13,11 @@ def load_data_from_api(*args, **kwargs):
     Template for loading data from API
     """
     url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-'
-    dfs = []
+    df = pd.DataFrame()
     for i in range(1, 13):
         filename = "{}{:02d}.parquet".format(url, i)
-
-        df_tmp = pd.read_parquet(filename)#, dtype=taxi_dtypes)
-
-        dfs.append(df_tmp)
-
-    df = pd.concat(dfs, ignore_index=True)
-
-    print(df.dtypes)
+        df_tmp = pd.read_parquet(filename)
+        df = df.append(df_tmp, ignore_index=True)
 
     return df
 

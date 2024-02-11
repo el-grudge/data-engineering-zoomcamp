@@ -20,10 +20,12 @@ def export_data_to_google_cloud_storage(df: DataFrame, **kwargs) -> None:
     config_profile = 'default'
 
     bucket_name = 'linen_source_411501_bucket'
-    object_key = 'green-taxi-2022'
+    object_key = 'green-taxi-2022-sample'
+
+    print(df.dtypes)
 
     GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(
-        df,
+        df.to_parquet(path, coerce_timestamps="us"),
         bucket_name,
-        object_key,
+        object_key
     )
