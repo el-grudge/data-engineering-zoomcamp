@@ -37,9 +37,3 @@ variable "bq_dataset_name" {
   #Update the below to what you want your dataset to be called
   default     = "linen_source_411501_dataset"
 }
-
-variable "bq_dataset_name_trips" {
-  description = "My BigQuery Dataset Trips Name"
-  #Update the below to what you want your dataset to be called
-  default     = "trips_data_all"
-}
