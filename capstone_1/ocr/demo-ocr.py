@@ -1,8 +1,12 @@
 # Imports the Google Cloud client library
 import os
+from dotenv import load_dotenv
 from google.cloud import vision
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/minasonbol/.gc/linen-source-vision.json'
+# Load environment variables from the .env file
+load_dotenv()
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getenv('GOOGLE_VISION_CREDENTIALS')
 
 def run_quickstart() -> vision.EntityAnnotation:
     """Provides a quick start example for Cloud Vision."""

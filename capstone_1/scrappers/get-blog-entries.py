@@ -1,8 +1,11 @@
 import requests
 import dlt
 import duckdb
-import pandas as pd
+import os
+from dotenv import load_dotenv
 
+# Load environment variables from the .env file
+load_dotenv()
 
 BASE_API_URL = "https://www.refinery29.com"
 blog_main_url = "/en-us/money-diary"
@@ -65,7 +68,7 @@ if __name__ == '__main__':
 
     conn.sql(f"SET search_path = '{pipeline.dataset_name}'")
 
-    sql_path = './project/sql'
+    sql_path = os.getenv('SQL_PATH')
     sql_file_path = f'{sql_path}/get_blogs.sql'
 
     sql_queries = read_sql_from_file(sql_file_path)

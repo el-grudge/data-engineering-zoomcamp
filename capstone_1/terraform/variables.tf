@@ -32,10 +32,3 @@ variable "gcs_storage_class" {
   description = "Bucket Storage Class"
   default     = "STANDARD"
 }
-
-# bigquery variables 
-variable "bq_dataset_name" {
-  description = "My BigQuery Dataset Trips Name"
-  #Update the below to what you want your dataset to be called
-  default     = "trips_data_all"
-}
