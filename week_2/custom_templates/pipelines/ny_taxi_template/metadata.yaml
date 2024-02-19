@@ -1,0 +1,169 @@
+description: null
+name: null
+pipeline:
+  blocks:
+  - all_upstream_blocks_executed: true
+    callback_blocks: []
+    color: null
+    conditional_blocks: []
+    configuration:
+      file_source:
+        path: week_2/data_loaders/extract_taxi_api.py
+    downstream_blocks:
+    - transfer_taxi_data_generic
+    executor_config: null
+    executor_type: local_python
+    has_callback: false
+    language: python
+    metadata: {}
+    name: extract_taxi_api
+    pipelines:
+    - added_at: null
+      pipeline:
+        created_at: '2024-02-11 05:30:17.213304+00:00'
+        description: null
+        name: ny-taxi
+        repo_path: week_2
+        tags: []
+        type: python
+        updated_at: '2024-02-11T07:52:28+00:00'
+        uuid: ny_taxi
+      updated_at: 1708306003.284762
+    retry_config: null
+    status: executed
+    tags: []
+    timeout: null
+    type: data_loader
+    upstream_blocks: []
+    uuid: extract_taxi_api
+  - all_upstream_blocks_executed: true
+    callback_blocks: []
+    color: null
+    conditional_blocks: []
+    configuration:
+      file_source:
+        path: week_2/transformers/transfer_taxi_data_generic.py
+    downstream_blocks:
+    - load_taxi_to_gcs_partitioned
+    executor_config: null
+    executor_type: local_python
+    has_callback: false
+    language: python
+    metadata: {}
+    name: transfer_taxi_data_generic
+    pipelines:
+    - added_at: null
+      pipeline:
+        created_at: '2024-02-11 05:30:17.213304+00:00'
+        description: null
+        name: ny-taxi
+        repo_path: week_2
+        tags: []
+        type: python
+        updated_at: '2024-02-11T07:52:28+00:00'
+        uuid: ny_taxi
+      updated_at: 1708306003.284947
+    retry_config: null
+    status: executed
+    tags: []
+    timeout: null
+    type: transformer
+    upstream_blocks:
+    - extract_taxi_api
+    uuid: transfer_taxi_data_generic
+  - all_upstream_blocks_executed: true
+    callback_blocks: []
+    color: null
+    conditional_blocks: []
+    configuration:
+      file_source:
+        path: week_2/data_exporters/load_taxi_to_gcs_partitioned.py
+    downstream_blocks:
+    - load_to_biquery
+    executor_config: null
+    executor_type: local_python
+    has_callback: false
+    language: python
+    metadata: {}
+    name: load_taxi_to_gcs_partitioned
+    pipelines:
+    - added_at: null
+      pipeline:
+        created_at: '2024-02-11 05:30:17.213304+00:00'
+        description: null
+        name: ny-taxi
+        repo_path: week_2
+        tags: []
+        type: python
+        updated_at: '2024-02-11T07:52:28+00:00'
+        uuid: ny_taxi
+      updated_at: 1708306003.285149
+    retry_config: null
+    status: not_executed
+    tags: []
+    timeout: null
+    type: data_exporter
+    upstream_blocks:
+    - transfer_taxi_data_generic
+    uuid: load_taxi_to_gcs_partitioned
+  - all_upstream_blocks_executed: false
+    callback_blocks: []
+    color: null
+    conditional_blocks: []
+    configuration:
+      file_source:
+        path: week_2/data_loaders/load_to_biquery.py
+    downstream_blocks: []
+    executor_config: null
+    executor_type: local_python
+    has_callback: false
+    language: python
+    metadata: {}
+    name: load-to-biquery
+    pipelines:
+    - added_at: null
+      pipeline:
+        created_at: '2024-02-11 05:30:17.213304+00:00'
+        description: null
+        name: ny-taxi
+        repo_path: week_2
+        tags: []
+        type: python
+        updated_at: '2024-02-11T07:52:28+00:00'
+        uuid: ny_taxi
+      updated_at: 1708306003.285339
+    retry_config: null
+    status: not_executed
+    tags: []
+    timeout: null
+    type: data_loader
+    upstream_blocks:
+    - load_taxi_to_gcs_partitioned
+    uuid: load_to_biquery
+  cache_block_output_in_memory: false
+  callbacks: []
+  concurrency_config: {}
+  conditionals: []
+  created_at: '2024-02-11 05:30:17.213304+00:00'
+  data_integration: null
+  description: null
+  executor_config: {}
+  executor_count: 1
+  executor_type: null
+  extensions: {}
+  name: ny-taxi
+  notification_config: {}
+  remote_variables_dir: null
+  retry_config: {}
+  run_pipeline_in_one_process: false
+  settings:
+    triggers: null
+  spark_config: {}
+  tags: []
+  type: python
+  updated_at: '2024-02-11T07:52:28+00:00'
+  uuid: ny_taxi_template
+  variables_dir: /home/src/mage_data/week_2
+  widgets: []
+tags: []
+user: {}
