@@ -65,28 +65,6 @@ services:
       - .:/home/src
       - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
     restart: on-failure:5
-  week-4:
-    image: week-4:001
-    command: mage start ${PROJECT_NAME}
-    env_file:
-      - week_4/.env
-    build:
-      context: .
-      dockerfile: ./week_4/week-4.dockerfile
-    environment:
-      USER_CODE_PATH: /home/src/${PROJECT_NAME}
-      ENV: ${ENV}
-      ENABLE_PROJECT_PLATFORM: ${ENABLE_PROJECT_PLATFORM}
-      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-    volumes:
-      - .:/home/src
-      - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
-    restart: on-failure:5
   capstone-1:
     image: capstone-1:001
     command: mage start ${PROJECT_NAME}

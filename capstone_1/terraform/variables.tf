@@ -25,7 +25,7 @@ variable "location" {
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
   #Update the below to a unique bucket name
-  default     = "de_zoomcamp_project"
+  default     = "de_zoomcamp_capstone"
 }
 
 variable "gcs_storage_class" {
