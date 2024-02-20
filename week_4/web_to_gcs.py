@@ -45,7 +45,7 @@ def web_to_gcs(year, service):
         month = month[-2:]
 
         # csv file_name
-        file_name = f"fhv/{service}_tripdata_{year}-{month}.csv.gz"
+        file_name = f"{service}_tripdata_{year}-{month}.csv.gz"
 
         # download it using requests via a pandas df
         request_url = f"{init_url}{service}/{file_name}"
@@ -68,4 +68,5 @@ def web_to_gcs(year, service):
 # web_to_gcs('2020', 'green')
 # web_to_gcs('2019', 'yellow')
 # web_to_gcs('2020', 'yellow')
-web_to_gcs('2019', 'fhv')
+# web_to_gcs('2019', 'fhv')
+web_to_gcs('2020', 'fhv')

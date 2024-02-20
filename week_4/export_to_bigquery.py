@@ -33,7 +33,7 @@ bucket = storage_client.bucket(bucket_name)
 gcs = GCSFileSystem()
 blobs = bucket.list_blobs(prefix='fhv/')
 for blob in blobs:
-    if blob.name.endswith('.parquet'):
+    if blob.name.endswith('2020-01.parquet'):
         table = pq.read_table(bucket_name + '/' + blob.name, filesystem=gcs)
         df = table.to_pandas()
 
