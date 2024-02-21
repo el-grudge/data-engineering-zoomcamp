@@ -18,8 +18,8 @@ bucket_name = os.getenv("GCP_GCS_BUCKET")
 project_id = 'linen-source-411501'
 
 # Set your BigQuery dataset ID and table ID
-dataset_id = 'trips_data_all'
-table_id = 'fhv_data'
+dataset_id = 'taxi_data_all'
+table_id = 'fhv_data_nonpartitioned'
 
 # Initialize the BigQuery client with your credentials
 client = bigquery.Client(project=project_id)
@@ -31,9 +31,9 @@ storage_client = storage.Client()
 dfs = []
 bucket = storage_client.bucket(bucket_name)
 gcs = GCSFileSystem()
-blobs = bucket.list_blobs(prefix='fhv/')
+blobs = bucket.list_blobs(prefix='taxi_data_all/fhv/')
 for blob in blobs:
-    if blob.name.endswith('2020-01.parquet'):
+    if blob.name.endswith('parquet'):
         table = pq.read_table(bucket_name + '/' + blob.name, filesystem=gcs)
         df = table.to_pandas()
 

@@ -1,89 +1,19 @@
 version: '3'
 services:
-  pgdatabase:
-    image: postgres:14
-    restart: on-failure
-    container_name: nytaxi-postgres
-    env_file:
-      - .env
-    environment:
-      POSTGRES_DB: ${POSTGRES_DBNAME}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "${POSTGRES_PORT}:5432"
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=root
-    ports:
-      - "8080:80"
-  week-2:
-    image: week-2:001
+  magic:
+    image: mageai/mageai:latest
     command: mage start ${PROJECT_NAME}
     env_file:
-      - week_2/.env
+      - .env
     build:
       context: .
-      dockerfile: ./week_2/week-2.dockerfile
+      dockerfile: Dockerfile
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
       ENV: ${ENV}
-      ENABLE_PROJECT_PLATFORM: ${ENABLE_PROJECT_PLATFORM}
-      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
     ports:
       - 6789:6789
     volumes:
-      - .:/home/src
-      - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
-    restart: on-failure:5
-  week-3:
-    image: week-3:001
-    command: mage start ${PROJECT_NAME}
-    env_file:
-      - week_3/.env
-    build:
-      context: .
-      dockerfile: ./week_3/week-3.dockerfile
-    environment:
-      USER_CODE_PATH: /home/src/${PROJECT_NAME}
-      ENV: ${ENV}
-      ENABLE_PROJECT_PLATFORM: ${ENABLE_PROJECT_PLATFORM}
-      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-    volumes:
-      - .:/home/src
-      - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
-    restart: on-failure:5
-  capstone-1:
-    image: capstone-1:001
-    command: mage start ${PROJECT_NAME}
-    env_file:
-      - capstone_1/.env
-    build:
-      context: .
-      dockerfile: ./capstone_1/capstone-1.dockerfile
-    environment:
-      USER_CODE_PATH: /home/src/${PROJECT_NAME}
-      ENV: ${ENV}
-      ENABLE_PROJECT_PLATFORM: ${ENABLE_PROJECT_PLATFORM}
-      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-    volumes:
-      - .:/home/src
+      - .:/home/src/
       - ~/.gc/linen-source-mage.json:/home/src/personal-gcp.json
     restart: on-failure:5

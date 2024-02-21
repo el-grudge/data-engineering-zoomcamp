@@ -1,0 +1,30 @@
+import pyarrow as pa 
+import pyarrow.parquet as pq 
+import os
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+# Load environment variables from the .env file
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/personal-gcp.json'
+
+bucket_name = 'linen_source_411501_bucket'
+project_id = 'linen-source-411501'
+
+table_name = "green_taxi_data"
+
+root_path = f'{bucket_name}/{table_name}'
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    table = pa.Table.from_pandas(data)
+
+    gcs = pa.fs.GcsFileSystem()
+
+    pq.write_to_dataset(
+        table,
+        root_path=root_path,
+        partition_cols=['lpep_pickup_date'],
+        filesystem=gcs
+    )
+

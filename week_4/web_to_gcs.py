@@ -30,7 +30,7 @@ def upload_to_gcs(bucket, object_name, local_file):
     # # (Ref: https://github.com/googleapis/python-storage/issues/74)
     # storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 5 MB
     # storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 5 MB
-
+    
     client = storage.Client()
     bucket = client.bucket(bucket)
     blob = bucket.blob(object_name)
@@ -39,11 +39,10 @@ def upload_to_gcs(bucket, object_name, local_file):
 
 def web_to_gcs(year, service):
     for i in range(12):
-        
         # sets the month part of the file_name string
         month = '0'+str(i+1)
         month = month[-2:]
-
+        
         # csv file_name
         file_name = f"{service}_tripdata_{year}-{month}.csv.gz"
 
@@ -52,7 +51,7 @@ def web_to_gcs(year, service):
         r = requests.get(request_url)
         open(file_name, 'wb').write(r.content)
         print(f"Local: {file_name}")
-
+        
         # read it back into a parquet file
         df = pd.read_csv(file_name, compression='gzip')
         file_name = file_name.replace('.csv.gz', '.parquet')
@@ -68,5 +67,5 @@ def web_to_gcs(year, service):
 # web_to_gcs('2020', 'green')
 # web_to_gcs('2019', 'yellow')
 # web_to_gcs('2020', 'yellow')
-# web_to_gcs('2019', 'fhv')
+web_to_gcs('2019', 'fhv')
 web_to_gcs('2020', 'fhv')
