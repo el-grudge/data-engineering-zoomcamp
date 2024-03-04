@@ -1,110 +1,20 @@
-# 5.1 Introduction
+In week 5️⃣ of the Data Engineering Zoomcamp we learned about 
 
-## 5.1.1 Introduction to Batch processing
-* Batch vs streaming
-* Types of batch jobs
-* Orchestration batch jobs
-* Advantages and disadvantages of batch jobs
+🔄🌊 Batch Processing
+We discussed the difference between batch processing and streaming. Batch processing involves collecting data over period of time and processing it in one go, or at a regular cadence (weekly/daily/hourly). On the other hand, in streaming, data is processed on the fly in real time. Batch processing jobs are easier to manage using workflow tools like Airflow. Also, they're easier to troubleshoot since the jobs are not running in-real-time. And finally, they're easier to scale. On the flip side, batch jobs introduce higher latency because they typically run at specific intervals, and deal with higher throughputs. 
 
-Batch - process a chunk of data at regular intervals. Stream - processing data on the fly
+⭐ Spark 
+The official definition of Apache Spark is: "a multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters." We can use Scala, Java, Python, SQL, or R to interact with Spark. Its features include: handles of batch and streaming data, executes SQL analytics, runs Data Science and ML at scale.
 
-Types of batch jobs: SQL, Python scripts, Spark, Flink
+🔀 Interacting with Spark
+We learned how to start a Spark session using Pyspark, and saw how to CSV files are stored in partitions. We looked at the Spark UI interface, which can be used to monitor the status and resource consumption of the jobs on the Spark cluster, and where we view see the execution DAG of any executed job.
 
-Advantages: easy to manage, retry, scale, easier to orchestrate
-Disadvantages: delay
+🔗🧩Spark SQL
+Next, we used Spark SQL to run some basic analytic statements, using joins and group bys. We saw how Group By statements are run in Spark, in the first step  Spark executors will deal with the data stored on separate partitions, and in the second step the data is shuffled so that records with the same key (think the Group By column) are grouped together to produce the final output. We also learned how different join operatsions are executed. When joining two large datasets, Spark shuffles the data among its executors to join them. When joining one large dataset with one small dataset Spark will broadcast the small dataset to all executors where the join happens in memory.
 
-## 5.1.2 Spark Introduction
-* What is Spark
-* Why do we need it
+☁️ Spark in the Cloud 
+We also learned how to connect a local Spark engine to GCS using the `gcs-connector-hadoop3-2.2.5.jar` and `hadoopConfiguration` settings. We saw how to submit a Spark job to a cluster on the cloud using DataProc, and how to store the output in BigQuery.
 
-Spark is a "general purpose distributed processing engine". Common use cases: batch-work worklaods. Also streaming.
+👉 I installed Spark on a cloud VM, set up a local session, and used to it to run some analytics on NY Taxi dataset. You can find the code [here](https://github.com/el-grudge/data-engineering-zoomcamp/tree/main/week_5). 
 
-When would you use Spark? For the same things you'd use SQL - but for executing the queries on the files in your datalake.
-
-If you can write this in SQL and use Hive/Presto/Athena/BQ - do it. But not everything can/should be expressed in SQL.
-
-Common case - ML algorithms. You can't easily use SQL for most of it.
-
-Typical pipeline
-
-Raw data -> Data lake -> Some transformations in SQL -> Spark -> Batch job in Python for training in model 
-
-Raw data -> Data lake -> SQL -> Spark -> Spark for applying the model -> SQL 
-
-# 5.2 Installation
-
-## 5.2.1. Installing Spark (Linux)
-* Connecting to an instance on GCP and installing it there 
-
-# 5.3 Spark SQL and DataFrames
-
-## 5.3.1 First Look at Spark/PySpark
-* Reading CSV files
-* Partitions
-* Saving data to Parquet for local experiments 
-* Spark master UI
-
-## 5.3.2 Spark DataFrames
-* Actions vs transformations
-* Functions and UDFs
-
-## 5.3.3 Spark SQL
-* Temporary tables 
-* Some simple queries from week 4
-
-## 5.3.4 Joins in Spark
-* Merge sort join 
-* Broadcasting
-
-# 5.4 Spark Internals
-
-## 5.4.1 Spark Cluster
-* Spark Driver, Master and Executors
-
-## 5.4.2 GroupBy in Spark
-* How GroupBy works internally
-* Shuffling
-
-## 5.4.3 Joins in Spark 
-* Joining two large tables
-* Merge sort join 
-* Joining one large and one small table 
-* Broadcasting
-
-
-# 5.5 (Optional) Resilient Distributed Datasets
-
-## 5.5.1 Resilient Distributed Datasets: map and reduce
-* What is RDD and how is it related to dataframes 
-* From DataFrame to RDD 
-* Operations on RDDs: map, mapPartition, reduceByKey
-* From RDD to DataFrame
-
-## 5.5.2 Spark RDD mapPartition
-* Using mapPartition on RDDs
-
-# 5.6 Running Spark in the Cloud
-
-## 5.6.1 Connecting to Google Cloud Storage
-* Uploading data to GCS
-* Connecting Spark jobs to GCS
-
-## 5.6.2 Creating a Local Spark Cluster
-* Creating the cluster cluster
-* Turning the notebook into a script 
-* Using spark-submit for submitting spark jobs
-
-## 5.6.3 Setting up a Dataproc Cluster
-* Creating a cluster
-* Running a spark job with Dataproc
-* Submitting the job with the cloud SDK
-
-## 5.6.4 Connecting Spark to Big Query
-* Writing the spark job results to BigQuery
-
-# 5.7 Spark and Docker
-
-## 5.7.1 Running Hadoop and YARN Locally
-* What is Hadoop, YARN and HDFS
-* Starting YARN locally in a stand-alone mode 
-* Running Spark jobs with YARN
+#data_engineering_zoomcamp #spark #pyspark #data_engineering #batch_processing #learning_in_public
