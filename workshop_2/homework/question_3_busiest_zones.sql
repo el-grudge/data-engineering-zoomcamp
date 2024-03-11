@@ -5,7 +5,7 @@ inner join taxi_zone b
 on a.pulocationid = b.location_id
 inner join taxi_zone c
 on a.dolocationid = c.location_id
-WHERE a.tpep_dropoff_datetime >= max
+WHERE a.tpep_pickup_datetime >= max
 group by 1
 order by 2 desc
 limit 3
