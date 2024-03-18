@@ -13,17 +13,17 @@ blog_main_url = "/en-us/money-diary"
 
 def paginated_getter(n_pages=1):
     page_number = 0
-
+    
     while page_number <= n_pages:
         # Set the query parameters
         params = {'json':'true', 'page': page_number}
-
+        
         # Make the GET request to the API
         response = requests.get(f'{BASE_API_URL}{blog_main_url}', params=params)
         response.raise_for_status()  # Raise an HTTPError for bad responses
         page_json = response.json()['result']['content']['modules']
         print(f'got page number {page_number} with {len(page_json)} records')
-
+        
         # if the page has no records, stop iterating
         if page_json:
             yield page_json
