@@ -1,13 +1,13 @@
 version: '3'
 services:
   magic:
-    image: mageai/mageai:latest
+    image: data-engineering-zoomcamp:001
     command: mage start ${PROJECT_NAME}
     env_file:
       - .env
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dezoomcamp.dockerfile
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
       ENV: ${ENV}
