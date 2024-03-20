@@ -54,3 +54,7 @@ https://www.refinery29.com/en-us/money-diary?json=true&page=10
 
 1-25
 from pages 1-25
+
+# ssh tunnel 
+## run this from local machine
+ssh -N -L localhost:8501:localhost:8501 wired-lol 
