@@ -17,7 +17,7 @@
 - [ ] Cloud: 4 points: The project is developed in the cloud and IaC tools are used 
     - [ ] setup mage.ai in the cloud using terraform
 - [x] Data ingestion (choose either batch or stream): 4 points: End-to-end pipeline: multiple steps in the DAG, uploading data to data lake
-- [*] Data warehouse: 4 points: Tables are partitioned and clustered in a way that makes sense for the upstream queries (with explanation)
+- [x] Data warehouse: 4 points: Tables are partitioned and clustered in a way that makes sense for the upstream queries (with explanation)
     - can be hard to achieve given dlt use (it loads data in DWH automatically) and given data size (a small dataset)
 - [ ]  Transformations (dbt, spark, etc): 4 points: Tranformations are defined with dbt, Spark or similar technologies 
     - learn how to use dbt in mage.ai
