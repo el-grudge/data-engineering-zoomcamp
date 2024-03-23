@@ -16,7 +16,7 @@ def export_data_to_big_query(df: DataFrame, **kwargs) -> None:
 
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
-    project_id = 'linen-source-411501'
+    project_id = kwargs['project_id']
     dataset = 'money_diaries_test'
     table_id = 'weekly_spending'
     config_path = path.join(get_repo_path(), 'io_config.yaml')

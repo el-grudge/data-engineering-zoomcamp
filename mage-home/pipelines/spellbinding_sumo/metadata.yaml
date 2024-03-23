@@ -52,7 +52,7 @@ blocks:
   language: python
   name: elusive noble
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:
@@ -95,13 +95,13 @@ blocks:
   language: python
   name: pristine song
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: transformer
   upstream_blocks:
   - musical_quest
   uuid: pristine_song
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks: []
@@ -111,7 +111,7 @@ blocks:
   language: python
   name: whimsical sky
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:
@@ -140,7 +140,6 @@ tags: []
 type: python
 uuid: spellbinding_sumo
 variables:
-  BASE_API_URL: https://www.refinery29.com
-  blog_main_url: /en-us/money-diary
+  project_id: linen-source-411501
 variables_dir: /home/src/mage_data/mage-home
 widgets: []

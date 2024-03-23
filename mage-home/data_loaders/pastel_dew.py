@@ -30,8 +30,7 @@ def paginated_getter(BASE_API_URL, blog_main_url, n_pages=1):
 
 # Load environment variables from the .env file
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/personal-gcp.json'
-# make this parameterized to be set by user
-project_id = 'linen-source-411501'
+project_id = kwargs['project_id']
 
 @data_loader
 def load_data(*args, **kwargs):
@@ -41,8 +40,8 @@ def load_data(*args, **kwargs):
     Returns:
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
-    BASE_API_URL = kwargs['BASE_API_URL']
-    blog_main_url = kwargs['blog_main_url']
+    BASE_API_URL = "https://www.refinery29.com"
+    blog_main_url = "/en-us/money-diary"
     # Define your pipeline
     pipeline = dlt.pipeline(
         pipeline_name='my_pipeline',

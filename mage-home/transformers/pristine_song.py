@@ -31,7 +31,6 @@ def detect_text_uri(uri):
     overall = [text.description for text in texts][0]
 
     keys = ["food_drink", "home_health", "clothes_beauty", "entertainment", "transport", "other"]
-    # values = [float(x.lstrip('$')) for x in overall.split('\n')[1:13] if re.compile(r'.*\d+.*').match(x)]
     values = [float(item.lstrip('$')) for sublist in [x.split(' ') for x in overall.split('\n')[1:-2] if re.compile(r'.*\d+.*').match(x)] for item in sublist]
 
     return {key: value for key, value in zip(keys, values)}
@@ -57,9 +56,6 @@ def transform(data, *args, **kwargs):
         data, 
         data['png_url'].apply(detect_text_uri).apply(pd.Series)
         ], axis=1)
-    # for url in data['png_url']:
-    #     print(url)
-    #     print(detect_text_uri(url))
     
     return df
 

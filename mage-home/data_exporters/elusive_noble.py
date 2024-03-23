@@ -24,7 +24,7 @@ def export_data(data, *args, **kwargs):
         displayed when inspecting the block run.
     """
     # Specify your data exporting logic here
-    BASE_API_URL = kwargs['BASE_API_URL']
+    BASE_API_URL = "https://www.refinery29.com"
     
     pipeline = dlt.pipeline(
         pipeline_name='my_pipeline',
