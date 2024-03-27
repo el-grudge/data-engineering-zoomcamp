@@ -1,8 +1,12 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "~/.gc/linen-source.json" # parametrize this
-  #ex: if you have a directory where this file is called keys with your service account json file
-  #saved there as my-creds.json you could use default = "./keys/my-creds.json"
+  #default     = "~/.gc/linen-source.json" # parametrize this
+  #default     = var.google_application_credentials_file_path != "" ? var.google_application_credentials_file_path : null
+}
+
+variable "google_application_credentials_file_path" {
+  description = "Path to the Google Cloud credentials JSON file. If not provided, it falls back to GOOGLE_APPLICATION_CREDENTIALS environment variable."
+  default     = ""
 }
 
 variable "project" {
@@ -44,6 +48,11 @@ variable "zone" {
   default     = "us-central1-c"
 }
 
+variable "location" {
+  description = "Project Location"
+  default     = "US"
+}
+
 variable "repository" {
   type        = string
   description = "The name of the Artifact Registry repository to be created"
@@ -82,6 +91,6 @@ variable "ssl" {
 
 variable "bq_dataset_name" {
   description = "My BigQuery Dataset Name"
-  default     = "demo_dataset" # parametrize this
+  default     = "demo_dataset" # change to money_diaries
 }
 

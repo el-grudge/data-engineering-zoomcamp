@@ -8,42 +8,44 @@
 - [x] ~~attest vision extracts agains json~~
 - [x] deploy mage to the cloud
 - [x] note permission to scrap
+- [x] ~~(variables tf) `export bq_dataset_name`~~
 - [ ] use dbt for second pipeline instead
-- [ ] attest using google vision
-- [ ] deploy streamlit
+- [x] deploy streamlit
 - [ ] dockerize streamlit
 - [ ] docstring all functions
+- [ ] cache queries in streamlit (see authentication page)
 - [ ] add prerequisite / permission list
-- [ ] add pipeline image
-- [ ] add dag image
+- [x] add pipeline image
+- [x] add dag image
 - [ ] add 'how to set project id in mage' gif
-- [ ] add dashboard link 
-- [ ] add dashboard screenshot image 
-- [ ] increase the number of bins of the salary distribution histogram
+- [x] add dashboard link 
+- [x] add dashboard screenshot image 
+- [x] increase the number of bins of the salary distribution histogram
 - [ ] filter on all charts in dashbaord 
-- [ ] add title (Money: An oral history)
+- [x] add title (Money: An oral history)
 - [ ] add paragraph to dashboard about inflation disconnect
-- [ ] create partitioned + clustered tables using dbt and store in bigquery
-- [ ] delete criteria from final readme
+- [x] create partitioned + clustered tables using dbt and store in bigquery
+- [x] delete criteria from final readme
 - [ ] move next steps to the bottom of readme
-- [ ] (variables tf) `export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
-- [ ] (variables tf) `export project_id `
-- [ ] (variables tf) `export gcp region`
-- [ ] (variables tf) `export gcp zone`
-- [ ] (variables tf) `export bq_dataset_name `
+- [x] (variables tf) `export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
+- [x] (variables tf) `export project_id `
+- [x] (variables tf) `export gcp region`
+- [x] (variables tf) `export gcp zone`
+- [x] (variables tf) `export gcp location`
 
 # Next steps
 1. create streaming pipeline that extracts new posts
 2. RAG: embed text into vector database
+3. attest using google vision
 
 # Criteria
 1. **Problem description** (_2 points_): Problem is well described and it's clear what the problem the project solves
 2. **Cloud** (_4 points_): The project is developed in the cloud and IaC tools are used 
 3. **Data ingestion (choose either batch or stream)** (*4 points*): End-to-end pipeline: multiple steps in the DAG, uploading data to data lake
-4. **Data warehouse** (*4 points*): Tables are partitioned and clustered in a way that makes sense for the upstream queries (with explanation)
-5.  **Transformations (dbt, spark, etc)** (*4 points*): Tranformations are defined with dbt, Spark or similar technologies 
-6.  **Dashboard** (*4 points*): A dashboard with 2 tiles 
-7.  **Reproducibility** (*4 points*): Instructions are clear, it's easy to run the code, and the code works
+1. **Data warehouse** (*4 points*): Tables are partitioned and clustered in a way that makes sense for the upstream queries (with explanation)
+2.  **Transformations (dbt, spark, etc)** (*4 points*): Tranformations are defined with dbt, Spark or similar technologies 
+3.  **Dashboard** (*4 points*): A dashboard with 2 tiles 
+4.  **Reproducibility** (*4 points*): Instructions are clear, it's easy to run the code, and the code works
 
 
 ## Problem Description 
@@ -64,11 +66,11 @@ The blog is a rich source of data for anyone who wants to learn about how money 
 ...
 
 ## Cloud
-The following cloud resources are provisioned / created using Terraform:
+The following cloud resources are provisioned using Terraform:
 - Mage.ai 
 - BigQuery dataset
 
-Follow the instructions [here](https://docs.mage.ai/production/deploying-to-cloud/gcp/setup) & [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform/1_terraform_gcp) for more details on how to create these resources with Terrform.
+See instructions in the Reproducibility section for details on how to deploy and run these resources.
 
 ## Data ingestion
 Data is ingested using a pipelines are created in Mage.ai. 
@@ -111,22 +113,25 @@ The dashboard has the following charts:
 
 ### Prerequisite
 
-1. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-2. [python](https://www.python.org/downloads/)
-3. [Docker](https://docs.docker.com/engine/install/)
-4. [Docker compose](https://docs.docker.com/compose/install/)
-5. [pip](https://pip.pypa.io/en/stable/installation/)
-6. [dbt](https://docs.getdbt.com/docs/core/connect-data-platform/bigquery-setup)
-7. [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-8. GCP account
+1. [Docker](https://docs.docker.com/engine/install/)
+2. [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+3. [dbt](https://docs.getdbt.com/docs/core/connect-data-platform/bigquery-setup)
+4. GCP account
 
-### Permsissions
+### Permissions
 
-- Artifact Registry Read
-- Artifact Registry Writer
-- Cloud Run Developer
-- Cloud SQL
-- Service Account Token Creator
+- Artifact Registry Read (mage)
+- Artifact Registry Writer (mage)
+- Cloud Run Developer (mage in the cloud) (try Cloud Run Admin instead) 
+- Cloud SQL Admin (mage in the cloud)
+- Service Account Token Creator (mage in the cloud)
+- BigQuery Admin (BigQuery) # if needed 
+- Cloud Vision AI Service Agent (Vision) # if needed
+- Secret Manager Secret Accessor (mage) # if needed
+- Vision AI Analysis Editor (Vision) # if needed
+- Vision AI Application Editor (Vision) # if needed
+- Service Usage Admin () # if needed
+- Service Object Viewer () # if needed
 
 ...
 
@@ -136,41 +141,72 @@ The dashboard has the following charts:
 
 
 ```bash
-git clone ...(giturl) \ 
+git clone https://github.com/el-grudge/money-diaries.git 
 ```
 
 2. Export the following environment variables 
 
-   * `export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
-   * (variables tf) `export project_id `
-   * (variables tf) `export gcp region`
-   * (variables tf) `export gcp zone`
-   * (variables tf) `export bq_dataset_name `
+Change the values of the following environment variables or set them in the `variables.tf` file
 
-3. Rename dev.env file to .env
 ```bash
-mv dev.env .env
+export GOOGLE_PROJECT=[project-name]
+export GOOGLE_PROJECT_ID=[project-id]
+export GCP_REGION=[region]
+export GCP_ZONE=[us-central1-c]
+export GCP_LOCATION=[location]
+export DB_PASSWORD=[database_password]
 ```
 
-4. Initialize terraform
+Note: The DB_PASSWORD parameter is for the Postgres database that will be used by Mage.ai's internal operations. The dashboard's data will be stored in a BigQuery dataset. 
+
+1. Provision cloud resources with terraform
+
+*terraform init* 
 ```bash
 cd terraform \
 terraform init
 ```
 
-5. View the resoures that will be provisioned to the cloud using the plan command
-
+*terraform plan*
 ```bash
-terraform plan
+terraform plan \
+  -var="project=${GOOGLE_PROJECT}" \
+  -var="project_id=${GOOGLE_PROJECT_ID}" \
+  -var="region=${GCP_REGION}" \
+  -var="zone=${GCP_ZONE}" \
+  -var="location=${GCP_LOCATION}"
 ```
 
-6. Deploy resources to the cloud with the apply command
-
+*terraform apply*
 ```bash
-terraform apply
+terraform apply \
+  -var="project=${GOOGLE_PROJECT}" \
+  -var="project_id=${GOOGLE_PROJECT_ID}" \
+  -var="region=${GCP_REGION}" \
+  -var="zone=${GCP_ZONE}" \
+  -var="location=${GCP_LOCATION}"
 ```
 
-Set project id in mage 
-[gif here]
+Terraform will deploy Mage.ai as a Google Clound Run service, which you can access by navigating to the Cloud Run option on the left navigation menu. On the service details page, you'll find the URL of the running service listed under the "Service URL" section. Copy & go to this URL to find the Mage.ai service:
 
-...
+[]
+
+Once inside Mage.ai service, you'll find the money_diaries pipeline already created. To run the pipeline, click on it to go the triggers page then press the Run@Once button, then the Run Now button in the Run Pipeline Now pop-up window. You can view the run's log by going to Run on the left navigation menu and clicking on the logs logo next to the Running pipeline:
+
+[]
+
+The pipeline will extract the blog posts from Money Diaries and load them into the BigQuery dataset called money_diaries, also provisioned by Terraform. You can view the dataset by navigating to BigQuery on the left navigation menu, then click on BigQuery Studio. Once the Explorer loads, expand the project containing your dataset to list all datasets: 
+
+[]
+
+To delete these resources, run the `terraform destroy` command:
+
+*terraform destroy*
+```bash
+terraform destroy \
+  -var="project=${GOOGLE_PROJECT}" \
+  -var="project_id=${GOOGLE_PROJECT_ID}" \
+  -var="region=${GCP_REGION}" \
+  -var="zone=${GCP_ZONE}" \
+  -var="location=${GCP_LOCATION}"
+```
