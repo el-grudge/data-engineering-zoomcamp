@@ -1,4 +1,17 @@
 # ToDo
+- [ ] build the second pipeline with google vision - to get missing values
+- [ ] docstring all functions
+- [ ] add prerequisite / permission list
+- [ ] combine docker images
+- [ ] add README to terraform
+- [ ] add README to dbt 
+- [ ] add README to streamlit
+- [ ] add README to docker
+- [ ] filter on all charts in dashbaord 
+- [ ] add paragraph to dashboard about inflation disconnect
+- [ ] move next steps to the bottom of readme
+- [x] ~~dockerize streamlit~~
+- [x] ~~add 'how to set project id in mage' gif~~
 - [x] first pipeline: get json from website  
 - [x] make project name parameterizable in mage
 - [x] second pipeline: extract text from images 
@@ -9,24 +22,17 @@
 - [x] deploy mage to the cloud
 - [x] note permission to scrap
 - [x] ~~(variables tf) `export bq_dataset_name`~~
-- [ ] use dbt for second pipeline instead
+- [x] use dbt for second pipeline instead
 - [x] deploy streamlit
-- [ ] dockerize streamlit
-- [ ] docstring all functions
-- [ ] cache queries in streamlit (see authentication page)
-- [ ] add prerequisite / permission list
+- [x] cache queries in streamlit (see authentication page)
 - [x] add pipeline image
 - [x] add dag image
-- [ ] add 'how to set project id in mage' gif
 - [x] add dashboard link 
 - [x] add dashboard screenshot image 
 - [x] increase the number of bins of the salary distribution histogram
-- [ ] filter on all charts in dashbaord 
 - [x] add title (Money: An oral history)
-- [ ] add paragraph to dashboard about inflation disconnect
 - [x] create partitioned + clustered tables using dbt and store in bigquery
 - [x] delete criteria from final readme
-- [ ] move next steps to the bottom of readme
 - [x] (variables tf) `export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
 - [x] (variables tf) `export project_id `
 - [x] (variables tf) `export gcp region`
