@@ -1,9 +1,23 @@
 1) create ssh 
+
+IMPORTANT: Add ssh public key (filename.pub) to gcp compute engine ssh keys
+
 ```
 ssh-keygen -t rsa -f ~/.ssh/gcp -C username -b 2048  
 ssh -i ~/.ssh/gcp username@ip  
 ssh-keygen -f "~/.ssh/known_hosts" -R "ip"
 ```
+
+Here's how to add other keys:
+
+```
+ssh-keygen -t rsa -f ~/.ssh/gcp_new -C newuser -b 2048
+cat ~/.ssh/gcp_new.pub >> ~/.ssh/gcp.pub
+ssh -i ~/.ssh/gcp newuser@ip
+ssh-keygen -f "~/.ssh/known_hosts" -R "ip"
+```
+
+
 2) create gcp instance (using gui)
 
 3) setup ssh config    
