@@ -1,12 +1,12 @@
 # ToDo
 - [ ] build the second pipeline with google vision - to get missing values
 - [ ] docstring all functions
-- [ ] add prerequisite / permission list
+- [x] add prerequisite / permission list
 - [x] combine docker images
-- [ ] add README to terraform
-- [ ] add README to dbt 
-- [ ] add README to streamlit
-- [ ] add README to docker
+- [x] add README to terraform
+- [x] add README to dbt 
+- [x] add README to streamlit
+- [x] add README to docker
 - [ ] filter on all charts in dashbaord 
 - [ ] add paragraph to dashboard about inflation disconnect
 - [ ] move next steps to the bottom of readme
