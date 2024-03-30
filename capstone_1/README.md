@@ -2,7 +2,7 @@
 - [ ] build the second pipeline with google vision - to get missing values
 - [ ] docstring all functions
 - [ ] add prerequisite / permission list
-- [ ] combine docker images
+- [x] combine docker images
 - [ ] add README to terraform
 - [ ] add README to dbt 
 - [ ] add README to streamlit
