@@ -1,15 +1,13 @@
 # ToDo
-- [ ] build the second pipeline with google vision - to get missing values
 - [ ] docstring all functions
+- [x] add paragraph to dashboard about inflation disconnect
+- [x] move next steps to the bottom of readme
 - [x] add prerequisite / permission list
 - [x] combine docker images
 - [x] add README to terraform
 - [x] add README to dbt 
 - [x] add README to streamlit
 - [x] add README to docker
-- [ ] filter on all charts in dashbaord 
-- [ ] add paragraph to dashboard about inflation disconnect
-- [ ] move next steps to the bottom of readme
 - [x] ~~dockerize streamlit~~
 - [x] ~~add 'how to set project id in mage' gif~~
 - [x] first pipeline: get json from website  
@@ -43,6 +41,9 @@
 1. create streaming pipeline that extracts new posts
 2. RAG: embed text into vector database
 3. attest using google vision
+4. build the second pipeline with google vision - to get missing values
+5. filter on all charts in dashbaord 
+
 
 # Criteria
 1. **Problem description** (_2 points_): Problem is well described and it's clear what the problem the project solves
